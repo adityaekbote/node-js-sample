@@ -7,11 +7,11 @@ var app = express()
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
-request('https://news.ycombinator.com', function (error, response, html) {
+request('http://uk.flightaware.com/live/flight/DAL4201', function (error, response, html) {
   if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html);
-    $('span.comhead').each(function(i, element){
-      var a = $(this).prev();
+    $('#polling-flight_status > div.track-panel-inner > table > tbody > tr:nth-child(1) > td').each(function(i, element){
+      var a = $(this);
       console.log(a.text());
     });
   }
