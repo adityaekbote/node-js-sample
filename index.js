@@ -6,8 +6,22 @@ var app = express()
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
+request({
+    method: 'GET',
+    url: 'https://github.com/showcases'
+}, function(err, response, body) {
+    if (err) return console.error(err);
 
-
+    // Tell Cherrio to load the HTML
+    $ = cheerio.load(body);
+    $('li.collection-card').each(function() {
+            var href = $('a.collection-card-image', this).attr('href');
+            if (href.lastIndexOf('/') > 0) {
+                console.log($('h3', this).text());
+            }
+    });
+});
+/*
  var title;
  url = 'http://www.flightstats.com/go/FlightTracker/flightTracker.do?airlineCode=DL&flightNumber=1432';
   request(url, function (error, response, body) 
@@ -20,7 +34,7 @@ app.use(express.static(__dirname + '/public'))
     console.log(title);
   }
 })
-
+*/
 app.get('/', function(request, response) {
   response.send(title);
 })
