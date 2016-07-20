@@ -6,7 +6,7 @@ var app = express()
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
-
+ var title;
  url = 'https://www.google.co.in/search?q=dl1162';
   request(url, function (error, response, body) 
 {  
@@ -14,8 +14,8 @@ app.use(express.static(__dirname + '/public'))
   if (!error && response.statusCode == 200) 
   {
     var $ = cheerio.load(body);
-    var title = $("#rso > div.g.tpo.knavi.obcontainer.mod > div > div.card-section.vk_c > ol > li > div > span").text();
-    console.log(title);
+    title = $("#rso > div.g.tpo.knavi.obcontainer.mod > div > div.card-section.vk_c > ol > li > div > span").text();
+    console.log("Flight Status" + title);
   }
 })
 
