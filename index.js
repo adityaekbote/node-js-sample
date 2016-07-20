@@ -9,24 +9,19 @@ app.use(express.static(__dirname + '/public'))
 
 
  var title;
- url = 'https://www.google.co.in/search?q=dl1162';
+ url = 'http://www.flightstats.com/go/FlightTracker/flightTracker.do?airlineCode=DL&flightNumber=1432';
   request(url, function (error, response, body) 
 {  
   
   if (!error && response.statusCode == 200) 
   {
     var $ = cheerio.load(body);
-    $('span._aXl').each(function(i, element){
-      var a = $(this);
-      console.log(a.text());
-    });
-    //title = $("span._aXl").text();
-    //console.log(title);
+    title = $('#scheduled_table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(5) > td:nth-child(2)').text();
+    console.log(title);
   }
-}) 
+})
 
 app.get('/', function(request, response) {
-  
   response.send(title);
 })
 
