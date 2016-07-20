@@ -10,7 +10,7 @@ var title;
 request('http://uk.flightaware.com/live/flight/DAL4201', function (error, response, html) {
   if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html);
-    title = $('.smallrow1').text();
+    title = $('td.smallrow1').substring(0, 8);;
     console.log(title);
   }
 });
