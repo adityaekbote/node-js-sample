@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/public'))
   if (!error && response.statusCode == 200) 
   {
     var $ = cheerio.load(body);
-    title = $("._aXl").text();
+    title = $("#logocont > h1").text();
     console.log(title);
   }
 }) 
