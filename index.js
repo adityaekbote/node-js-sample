@@ -16,8 +16,12 @@ app.use(express.static(__dirname + '/public'))
   if (!error && response.statusCode == 200) 
   {
     var $ = cheerio.load(body);
-    title = $("span._aXl").text();
-    console.log(title);
+    $('span._aXl').each(function(i, element){
+      var a = $(this);
+      console.log(a.text());
+    });
+    //title = $("span._aXl").text();
+    //console.log(title);
   }
 }) 
 
