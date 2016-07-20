@@ -7,6 +7,19 @@ var app = express()
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
+request('https://news.ycombinator.com', function (error, response, html) {
+  if (!error && response.statusCode == 200) {
+    var $ = cheerio.load(html);
+    $('span.comhead').each(function(i, element){
+      var a = $(this).prev();
+      console.log(a.text());
+    });
+  }
+});
+
+
+
+/*
  var title;
  url = 'https://www.google.co.in/search?q=delta+flight+status&oq=delta+flight+status&aqs=chrome.0.69i59j69i57j69i60l4.3575j0j4&sourceid=chrome&ie=UTF-8';
   request(url, function (error, response, body) 
@@ -19,7 +32,7 @@ app.use(express.static(__dirname + '/public'))
     console.log(title);
   }
 })
-
+*/
 app.get('/', function(request, response) {
   response.send(title);
 })
