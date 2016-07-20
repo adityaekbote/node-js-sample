@@ -3,14 +3,14 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express()
 
-
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
+
 var title;
 request('http://uk.flightaware.com/live/flight/DAL4201', function (error, response, html) {
   if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html);
-    title = $('#polling-flight_status > div.track-panel-inner > table > tbody > tr:nth-child(1) > td').text();
+    title = $('.smallrow1').text();
     console.log(title);
   }
 });
