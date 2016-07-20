@@ -22,22 +22,24 @@ var title;
   }
 })
 */
-function getDetails(url){
- request(url , function (error, response, html) {
+
+
+
+
+app.get('/:flt', function(request, response) {
+  var url = "http://uk.flightaware.com/live/flight/" + req.params.flt;
+  var res = function($url){
+    request(url , function (error, response, html) {
   if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html);
     title = $('td.smallrow1');
     console.log(title);
-    return title;
   }
 });
-}
+ 
+  };
 
-app.get('/:flt', function(request, response) {
-  var url = "http://uk.flightaware.com/live/flight/"+ req.params.flt;
-  var res;
-  res = getDetails(url);
-  response.send(res);
+  response.send(title);
 })
 
 
