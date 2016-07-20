@@ -7,8 +7,7 @@ var app = express()
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
-app.get('/', function(request, response) {
-   url = 'https://www.google.co.in/search?q=dl1162';
+ url = 'https://www.google.co.in/search?q=dl1162';
   request(url, function (error, response, body) 
 {  
   
@@ -18,6 +17,9 @@ app.get('/', function(request, response) {
     var title = $("#rso > div.g.tpo.knavi.obcontainer.mod > div > div.card-section.vk_c > ol > li > div > span").text();
   }
 })
+
+app.get('/', function(request, response) {
+  
   response.send(title);
 })
 
