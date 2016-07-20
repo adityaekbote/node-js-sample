@@ -6,37 +6,20 @@ var app = express()
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
-var title;
-request({
-    method: 'GET',
-    url: 'https://github.com/showcases'
-}, function(err, response, body) {
-    if (err) return console.error(err);
 
-    // Tell Cherrio to load the HTML
-    $ = cheerio.load(body);
-    $('li.collection-card').each(function() {
-            var href = $('a.collection-card-image', this).attr('href');
-            if (href.lastIndexOf('/') > 0) {
-                console.log($('h3', this).text());
-                title = $('h3', this).text();
-            }
-    });
-});
-/*
  var title;
- url = 'http://www.flightstats.com/go/FlightTracker/flightTracker.do?airlineCode=DL&flightNumber=1432';
+ url = 'https://www.google.co.in/search?q=delta+flight+status&oq=delta+flight+status&aqs=chrome.0.69i59j69i57j69i60l4.3575j0j4&sourceid=chrome&ie=UTF-8';
   request(url, function (error, response, body) 
 {  
   
   if (!error && response.statusCode == 200) 
   {
     var $ = cheerio.load(body);
-    title = $('#scheduled_table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(5) > td:nth-child(2)').text();
+    title = $('#rso > div.g.mnr-c.g-blk > div.kp-blk._Z7._Rqb._RJe > div > div._OKe > div:nth-child(2) > div.mod > div > div.knowledge-webanswers_table__webanswers-table > table > tbody > tr:nth-child(2) > td:nth-child(2)').text();
     console.log(title);
   }
 })
-*/
+
 app.get('/', function(request, response) {
   response.send(title);
 })
