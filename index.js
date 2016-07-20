@@ -6,6 +6,7 @@ var app = express()
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
+var title;
 request({
     method: 'GET',
     url: 'https://github.com/showcases'
@@ -18,6 +19,7 @@ request({
             var href = $('a.collection-card-image', this).attr('href');
             if (href.lastIndexOf('/') > 0) {
                 console.log($('h3', this).text());
+                title = $('h3', this).text();
             }
     });
 });
