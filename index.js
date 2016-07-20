@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/public'))
   if (!error && response.statusCode == 200) 
   {
     var $ = cheerio.load(body);
-    title = $("#rso > div.g.tpo.knavi.obcontainer.mod > div > div.card-section.vk_c > div.vk_h.vk_bk").text();
+    title = $("_aXl span").text();
     console.log("Flight Status" + title);
   }
 }) 
