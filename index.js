@@ -34,7 +34,7 @@ function getFlt(abc){
 }
 
 app.get('/:flt', function(request, response) {
-  var url1 = "http://uk.flightaware.com/live/flight/"+ req.params.flt;
+  var url1 = "http://uk.flightaware.com/live/flight/"+ request.params.flt;
   var res = getFlt(url1);
   response.send(res);
 })
