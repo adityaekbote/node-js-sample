@@ -28,7 +28,6 @@ var title;
     var $ = cheerio.load(html);
     title = $('td.smallrow1').substring(0,13);
     console.log(title);
-    return title;
   }
 });
 
