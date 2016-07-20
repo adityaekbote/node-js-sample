@@ -15,6 +15,7 @@ app.use(express.static(__dirname + '/public'))
   {
     var $ = cheerio.load(body);
     var title = $("#rso > div.g.tpo.knavi.obcontainer.mod > div > div.card-section.vk_c > ol > li > div > span").text();
+    console.log(title);
   }
 })
 
