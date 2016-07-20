@@ -8,9 +8,6 @@ app.use(express.static(__dirname + '/public'))
 
 var title;
 
-
-
-
 /*
  var title;
  url = 'https://www.google.co.in/search?q=delta+flight+status&oq=delta+flight+status&aqs=chrome.0.69i59j69i57j69i60l4.3575j0j4&sourceid=chrome&ie=UTF-8';
@@ -26,10 +23,11 @@ var title;
 })
 */
 app.get('/:flt', function(request, response) {
-  request("http://uk.flightaware.com/live/flight/"+ req.params.flt , function (error, response, html) {
+  var url = "http://uk.flightaware.com/live/flight/"+ req.params.flt;
+  request(url , function (error, response, html) {
   if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html);
-    title = $('td.smallrow1').substring(0, 8);
+    title = $('td.smallrow1');
     console.log(title);
   }
 });
