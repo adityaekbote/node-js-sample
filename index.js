@@ -22,18 +22,22 @@ var title;
   }
 })
 */
-
- request("https://www.flightpedia.org/flight-status/dl1501.html" , function (error, response, html) {
+function getData(url){
+ request(url , function (error, response, html) {
   if (!error && response.statusCode == 200) {
     var $ = cheerio.load(html);
     title = $('.flightstatus b').text();
     console.log(title);
+    
   }
 });
+return title;
+}
 
-
-app.get('/', function(request, response) {
-  response.send(title);
+app.get('/:flt', function(request, response) {
+  var url_1 = "https://www.flightpedia.org/flight-status/"+ request.param("flt") +".html";
+  var res = getData(url_1);
+  response.send(res);
 })
 
 
